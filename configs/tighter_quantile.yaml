@@ -1,0 +1,63 @@
+# =============================================================================
+# Default configuration for the systematic credit mini-pipeline
+# =============================================================================
+# All tunable parameters live here. Pipeline is fully reproducible from
+# this file: change a value, rerun, get a new result. No code edit needed.
+
+run_name: "baseline_v1"
+
+data:
+  # Paths are relative to the project root.
+  raw_files:
+    - "data/raw/USHY_INDEX_20260301_part_1.csv"
+    - "data/raw/USHY_INDEX_20260301_part_2.csv"
+  processed_path: "data/processed/ushy_panel.parquet"
+  macro_path: "data/processed/macro.parquet"
+
+  # FRED series for the regime filter. Public CSV endpoint, no API key.
+  # If FRED is unreachable the pipeline falls back to an in-sample regime
+  # built from cross-sectional median OAS of the panel itself.
+  fred_series:
+    vix: "VIXCLS"               # CBOE Volatility Index
+    hy_oas: "BAMLH0A0HYM2"      # ICE BofA US High Yield OAS
+
+backtest:
+  start_date: "2010-01-01"
+  end_date: "2026-03-01"
+  rebalance_freq: "M"           # informational; data is monthly already
+  min_years_to_maturity: 1.0
+  max_years_to_maturity: 15.0
+  drop_missing_oas: true
+  drop_missing_oad: true
+
+signal:
+  # Cross-sectional value: z-score of OAS/DTS within (rating, sector).
+  # See features.py docstring for full economic intuition.
+  group_by: ["Eff_Rating_Group", "Class3"]
+  winsorize_pct: 0.01
+
+  # Regime overlay: stress flagged when z-score >= threshold.
+  # Tilt toward higher-quality bonds in stress months.
+  regime_threshold: 1.0
+
+portfolio:
+  # Long-only, top-quintile selection.
+  top_quantile: 0.10
+  weighting: "equal"            # "equal" or "signal"
+  # Constraints (all enforced by water-filling)
+  max_issuer_weight: 0.02       # 2% per issuer (Ticker)
+  max_sector_weight: 0.20       # 20% per sector (Class3)
+  # Duration target — the OAS/DTS signal naturally tilts shorter-dated,
+  # so target is set realistically rather than fighting the universe.
+  # See MEMO.md for the duration-neutralization next step.
+  duration_target: 2.0
+  duration_tolerance: 1.0
+
+evaluation:
+  outputs_dir: "outputs"
+  save_plots: true
+  save_results_csv: true
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s | %(levelname)-7s | %(name)s | %(message)s"
