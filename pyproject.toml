@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "credit-pipeline"
 version = "0.1.0"
 description = "Systematic US High Yield mini-pipeline"
-requires-python = ">=3.10"
+requires-python = ">=3.9"
 
 [tool.setuptools.packages.find]
 where = ["src"]

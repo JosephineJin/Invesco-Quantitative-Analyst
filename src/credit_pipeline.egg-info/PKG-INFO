@@ -2,4 +2,4 @@ Metadata-Version: 2.4
 Name: credit-pipeline
 Version: 0.1.0
 Summary: Systematic US High Yield mini-pipeline
-Requires-Python: >=3.10
+Requires-Python: >=3.9
