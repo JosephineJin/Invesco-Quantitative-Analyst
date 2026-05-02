@@ -1,3 +1,6 @@
 .venv/
 __pycache__/
 *.parquet
+
+# Input data (large files, not appropriate for git)
+data/raw/*.csv
