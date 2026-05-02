@@ -4,3 +4,7 @@ __pycache__/
 
 # Input data (large files, not appropriate for git)
 data/raw/*.csv
+
+# Jupyter notebook checkpoints (auto-generated, never commit)
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
