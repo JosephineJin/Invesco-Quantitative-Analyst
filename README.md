@@ -76,8 +76,6 @@ Invesco-Quantitative-Analyst/
 │   ├── test_features.py          # 4 tests
 │   ├── test_portfolio.py         # 5 tests
 │   └── test_evaluation.py        # 4 tests
-├── notebooks/
-│   └── demo.ipynb                # thin wrapper showing results
 ├── MEMO.md                       # 2-page PM-facing write-up
 ├── pyproject.toml
 ├── requirements.txt
