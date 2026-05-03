@@ -1,9 +1,7 @@
 # Systematic Credit Mini-Pipeline
 
 A small, end-to-end research pipeline for a long-only US High Yield credit
-strategy. Built for the Invesco second-round take-home: emphasis on
-engineering quality (reproducibility, modularity, testing, robustness)
-over breadth.
+strategy. Built for the Invesco second-round take-home project.
 
 ## What it does
 
@@ -86,6 +84,7 @@ Invesco-Quantitative-Analyst/
 ├── pyproject.toml
 ├── requirements.txt
 └── README.md
+
 ## The signal in one paragraph
 
 For each bond we compute carry per unit of mark-to-market risk:
