@@ -5,10 +5,6 @@ strategy. Built for the Invesco second-round take-home project.
 
 ## What it does
 
-raw CSVs ──► clean panel (Parquet) ──► signal + regime ──► portfolio ──► returns + plots
-│                          │                  │              │
-data.py                   features.py      portfolio.py   evaluation.py
-
 One command rebuilds everything from raw inputs. Parameters live in
 `configs/default.yaml`; no code edits required to sweep over them.
 
@@ -46,19 +42,19 @@ drawdown −13% vs −16%. See `MEMO.md` for the full write-up.
 
 ## Data setup
 
-The raw bond panel CSVs are not committed to this repo (they're large
-input data, not code). To run the pipeline locally:
+The raw bond panel CSVs are not committed (large input data, not
+code). To run the pipeline locally:
 
-1. Obtain the two source CSVs:
-   `USHY_INDEX_20260301_part_1.csv` and `USHY_INDEX_20260301_part_2.csv`.
-2. Place them in `data/raw/`:
-data/raw/
-├── USHY_INDEX_20260301_part_1.csv
-└── USHY_INDEX_20260301_part_2.csv
-The first run reads these CSVs and caches a cleaned Parquet file. Subsequent
-runs read from the cache (~10× faster).
+1. Obtain the two source CSVs: `USHY_INDEX_20260301_part_1.csv` and
+   `USHY_INDEX_20260301_part_2.csv`.
+2. Place them in `data/raw/`.
+
+The first run reads the CSVs and caches a cleaned Parquet file.
+Subsequent runs read from the cache (~10× faster).
 
 ## Project layout
+
+```text
 Invesco-Quantitative-Analyst/
 ├── configs/
 │   └── default.yaml              # all tunable parameters
@@ -67,7 +63,7 @@ Invesco-Quantitative-Analyst/
 │   └── processed/                # cached Parquet (gitignored)
 ├── outputs/                      # generated charts and CSVs
 ├── src/credit_pipeline/
-│   ├── init.py
+│   ├── __init__.py
 │   ├── config.py                 # YAML loader
 │   ├── logging_utils.py          # logger setup
 │   ├── data.py                   # ingest CSVs + FRED, cache to Parquet
@@ -80,10 +76,13 @@ Invesco-Quantitative-Analyst/
 │   ├── test_features.py          # 4 tests
 │   ├── test_portfolio.py         # 5 tests
 │   └── test_evaluation.py        # 4 tests
+├── notebooks/
+│   └── demo.ipynb                # thin wrapper showing results
 ├── MEMO.md                       # 2-page PM-facing write-up
 ├── pyproject.toml
 ├── requirements.txt
 └── README.md
+```
 
 ## The signal in one paragraph
 
