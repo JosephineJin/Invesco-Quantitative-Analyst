@@ -35,3 +35,4 @@ anaconda_projects/
 .pytest_cache/
 .coverage
 htmlcov/
+*.egg-info/
