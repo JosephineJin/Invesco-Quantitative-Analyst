@@ -1,10 +1,5 @@
 # Memo: Systematic Credit Mini-Pipeline
 
-**To:** Portfolio managers and analysts, systematic fixed income
-**From:** Quant Analyst candidate
-**Re:** End-to-end research pipeline for a long-only US HY credit signal
-**Date:** May 2026
-
 ---
 
 ## What I built
@@ -133,8 +128,6 @@ and one-way turnover.
 
 ## What I would do next
 
-With another day:
-
   - **Walk-forward signal IC analysis.** Verify the signal isn't
     over-fit to any single decade by reporting IC by year and by
     rating bucket.
@@ -144,9 +137,6 @@ With another day:
     within each cohort and use the residual as the score. Removes the
     structural short-duration bias and lets the duration target be
     set freely.
-
-With another week:
-
   - **Multi-signal blend.** Add a second, lightly-correlated signal
     (e.g. excess-return momentum, or change-in-OAS reversal) and sum
     the z-scores. Diversification of signals usually beats any single
@@ -157,11 +147,11 @@ With another week:
     value signal so we aren't buying value in names heading to D.
 
 ## How to run it
-
+```bash
 pip install -r requirements.txt
 pip install -e .
 python -m credit_pipeline.run --config configs/default.yaml
 python -m pytest -q
-
+```
 All knobs in `configs/default.yaml`. See `README.md` for the design
 walkthrough.
