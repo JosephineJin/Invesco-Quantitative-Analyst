@@ -36,3 +36,5 @@ anaconda_projects/
 .coverage
 htmlcov/
 *.egg-info/
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
